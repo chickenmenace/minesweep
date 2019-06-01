@@ -1,1 +1,1 @@
-# minesweep
+# minesweeper clone in Python

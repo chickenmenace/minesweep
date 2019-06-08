@@ -10,7 +10,7 @@ class minesweep_board:
     from collections import Set
     
     
-    def __init__(self, board_lenght = 15, board_height = 15, mines = 20):
+    def __init__(self, board_lenght = 15, board_height = 15, mines = 15):
         from random import shuffle
         
         #initialize board
@@ -133,38 +133,48 @@ class minesweep_board:
             else:
                 print(' ' + str(i) + ' ' ,end = '')
         if self.board_height > 10:
-            print ('\n  ┌', end='')
+            print ('\n  ╔', end='')
         else:
-            print ('\n ┌', end='')
+            print ('\n ╔', end='')
         for i in range(0,self.board_lenght):
-            print('───' ,end = '')
-        
+            print('═══' ,end = '')
         for i in range(len(self.board)):
-            if self.board_height < 10:
+            if self.board_height < 11:
                 if i % self.board_lenght == 0:
-                    print ('\n' + str(int(i/self.board_lenght)) + '│', end = '')
+                    if i == 0 :
+                        print ( '╗\n' + str(int(i/self.board_lenght)) + '║', end = '')
+                    else:
+                        print ( '║\n' + str(int(i/self.board_lenght)) + '║', end = '')
                 if i in self.played_cells:
                     if self.board[i] == 0:
                         print ('   ', end='')
                     else:
                         print (' ' + str(self.board[i]) + ' ', end='')
                 else:
-                    print (' \u25A1 ' , end = '')
+                    print (' \u25A1 '  , end = '') #u25A1 1360 1368 13EB 1CC0 1CC1 203B 2055 205C 235F 233E 2600 2606 _2620 2622 2623
             else:
+
                 if i % self.board_lenght == 0:
-                    if int(i/self.board_lenght) < 10:
-                        print ('\n' + ' ' + str(int(i/self.board_lenght)) + '│', end = '')
-                    else:
-                        print ('\n' + str(int(i/self.board_lenght)) + '│', end = '')
+                    if i == 0 :
+                        print ( '╗\n' + ' ' + str(int(i/self.board_lenght)) + '║', end = '')
+                    elif int(i/self.board_lenght) < 10:
+                        print ( '║\n' + ' ' + str(int(i/self.board_lenght)) + '║', end = '')
+                    elif int(i/self.board_lenght) > 9:
+                        print ( '║\n' + str(int(i/self.board_lenght)) + '║', end = '')
                 if i in self.played_cells:
                     if self.board[i] == 0:
                         print ('   ', end='')
                     else:
                         print (' ' + str(self.board[i]) + ' ', end='')
                 else:
-                    print (' \u25A1 ' , end = '')
-        print ('\n')
-    
+                    print (' \u25A1 '  , end = '')
+        if self.board_height > 10:
+            print ('║\n  ╚', end='')
+        else:
+            print ('║\n ╚', end = '')
+        for i in range(0,self.board_lenght):
+            print('═══' ,end = '')  
+        print ('╝\n')  
     def print_open(self):
         if self.board_height > 10:
             print ('   ', end='')
@@ -179,20 +189,34 @@ class minesweep_board:
             else:
                 print(' ' + str(i) + ' ' ,end = '')
         if self.board_height > 10:
-            print ('\n  ┌', end='')
+            print ('\n  ╔', end='')
         else:
-            print ('\n ┌', end='')
+            print ('\n ╔', end='')
         for i in range(0,self.board_lenght):
-            print('───' ,end = '')
+            print('═══' ,end = '')
         for i in range(len(self.board)):
             if i % self.board_lenght == 0:
-                if int(i/self.board_lenght) < 10:
-                    print ('\n ' + str(int(i/self.board_lenght)) + '│', end = '')
+                if self.board_height <= 10:
+                    if i == 0 :
+                        print ( '╗\n' + str(int(i/self.board_lenght)) + '║', end = '')
+                    else:
+                        print ( '║\n' + str(int(i/self.board_lenght)) + '║', end = '')
+                   # print ('\n' + str(int(i/self.board_lenght)) + '║', end = '')
                 else:
-                    print ('\n' + str(int(i/self.board_lenght)) + '│', end = '')
+                    if i == 0:
+                        print ( '╗\n ' + str(int(i/self.board_lenght)) + '║', end = '')
+                    elif int(i/self.board_lenght) < 10:
+                        print ('║\n ' + str(int(i/self.board_lenght)) + '║', end = '')
+                    else:
+                        print ('║\n' + str(int(i/self.board_lenght)) + '║', end = '')
             if self.board[i] == 0:
                 print ('   ', end='')
             else:
                 print (' ' + str(self.board[i]) + ' ', end='')
-
-        print ('\n')
+        if self.board_height > 10:
+            print ('║\n  ╚', end='')
+        else:
+            print ('║\n ╚', end = '')
+        for i in range(0,self.board_lenght):
+            print('═══' ,end = '')  
+        print ('╝\n')
